@@ -4,7 +4,7 @@ class Mensagem {
     }
 
     get texto() {
-        return this._texto = '';
+        return this._texto;
     }
 
     set texto(texto) {
