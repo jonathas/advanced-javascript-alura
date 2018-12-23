@@ -68,55 +68,10 @@
 
 ## Content
 
-### How to know when the model has changed?
-
-- Did you remember to update the view? Me neither!
-- Less responsibility, better code
-- What if we update the view when the template changes?
-- The dynamism of "this"
-- Reflection API and the facets of this
-- Arrow function and its lexical scope
-
-### Is there a liar model? The Proxy Project Pattern!
-
-- Model and reuse in projects
-- The Proxy design pattern
-- Reading traps
-- Writing Traps
-- Traps for methods
-
-### What if someone created our proxies? The Factory Project Pattern
-
-- Isolating the complexity of creating proxies with the Factory Project Pattern
-- Our proxy is not 100% yet!
-- Isolating the complexity of associating the model with the view in the Bind class
-- Constructor returning instance of another type!
-- REST Parameters
-
-### Importing negotiations
-
-- Infrastructure Prerequisite
-- Learning to climb our server
-- Available services
-- Ajax requests with the XMLHttpRequest object
-- Understanding the onreadystatechange event
-- Dealing with status codes
-- Performing response parse
-- Creating and Adding Incoming Negotiations
-- Dealing with possible server errors
-
-### Combating Callback HELL with Promises
-
-- The problem of asynchronous life
-- Callback HELL and Pyramid of DOOM
-- The Promise Project Pattern
-- Dealing with errors
-- Pyramid of DOOM again? Of course not, Promise.all in it!
-- Flattening a list of arrays!
-- Isolating complexity in HttpService
-- Further reducing the complexity of our code
-
-### Final considerations and bonus exercises
-
-- Have we reached the end?
-- Bonus surprise!
+- Saving Offline Negotiations with IndexedDB
+- Managing our connection to the Factory pattern
+- Standardizing access to data with the DAO standard
+- Lapidating our application a little more
+- Simplifying Ajax requests with a Fetch API
+- Making code even more optimized using Babel
+- Working with ES2015 modules!
