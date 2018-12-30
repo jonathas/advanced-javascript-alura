@@ -1,7 +1,6 @@
 class NegociacaoController {
 
     constructor() {
-
         let $ = document.querySelector.bind(document);
 
         this._inputData = $('#data');
@@ -17,21 +16,18 @@ class NegociacaoController {
             new Mensagem(), new MensagemView($('#mensagemView')),
             'texto');
 
+        this._service = new NegociacaoService();
+
         this._init();
     }
 
     _init() {
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.listaTodos())
+        this._service
+            .lista()
             .then(negociacoes =>
                 negociacoes.map(negociacao =>
                     this._listaNegociacoes.adiciona(negociacao)))
-            .catch(err => {
-                console.log(err);
-                this._mensagem.texto = err;
-            });
+            .catch(err => this._mensagem.texto = err);
 
         setInterval(() => {
             this._importaNegociacoes();
@@ -43,7 +39,7 @@ class NegociacaoController {
 
         const negociacao = this._criaNegociacao();
 
-        new NegociacaoService()
+        this._service
             .cadastra(negociacao)
             .then(mensagem => {
                 this._listaNegociacoes.adiciona(negociacao);
@@ -53,12 +49,8 @@ class NegociacaoController {
     }
 
     _importaNegociacoes() {
-        const service = new NegociacaoService();
-
-        service.obterNegociacoes()
-            .then(negociacoes => negociacoes.filter(n1 =>
-                !this._listaNegociacoes.negociacoes
-                .some(n2 => JSON.stringify(n1) == JSON.stringify(n2))))
+        this._service
+            .importa(this._listaNegociacoes.negociacoes)
             .then(negociacoes => {
                 negociacoes.map(negociacao => this._listaNegociacoes.adiciona(negociacao));
                 this._mensagem.texto = 'Negociações importadas com sucesso';
@@ -67,18 +59,16 @@ class NegociacaoController {
     }
 
     apaga() {
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.apagaTodos())
+        this._service
+            .apaga()
             .then(mensagem => {
                 this._mensagem.texto = mensagem;
                 this._listaNegociacoes.esvazia();
-            });
+            })
+            .catch(err => this._mensagem.texto = err);
     }
 
     _criaNegociacao() {
-
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
             parseInt(this._inputQuantidade.value),
@@ -86,7 +76,6 @@ class NegociacaoController {
     }
 
     _limpaFormulario() {
-
         this._inputData.value = '';
         this._inputQuantidade.value = 1;
         this._inputValor.value = 0.0;
