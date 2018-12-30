@@ -1,0 +1,17 @@
+{
+    "name": "client",
+    "description": "",
+    "version": "0.0.1",
+    "main": "app.js",
+    "license": "GPL-3.0",
+    "author": "Jon Ribeiro <contact@jonathas.com>",
+    "scripts": {
+        "start": "node app.js",
+        "build": "babel js/app-es6 -d js/app"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "^6.10.1",
+        "babel-preset-es2015": "^6.9.0"
+    }
+}
